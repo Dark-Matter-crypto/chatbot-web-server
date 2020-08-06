@@ -1,10 +1,8 @@
 package csc2b.server;
 
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.Socket;
+import java.util.StringTokenizer;
 
 public class WebServerHandler implements Runnable {
 
@@ -16,9 +14,37 @@ public class WebServerHandler implements Runnable {
 
     @Override
     public void run() {
+        BufferedReader in;
+        DataOutputStream out;
+
         try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(clientConnection.getInputStream()));
-            DataInputStream dis = new DataInputStream(clientConnection.getInputStream());
+            in = new BufferedReader(new InputStreamReader(clientConnection.getInputStream()));
+            out = new DataOutputStream(new BufferedOutputStream(clientConnection.getOutputStream()));
+
+            String request = in.readLine();
+            StringTokenizer tokenizer = new StringTokenizer(request);
+            String requestType = tokenizer.nextToken();
+            String fileName = tokenizer.nextToken().substring(1);
+            File file = new File(fileName);
+
+            if (requestType.equals("GET")){
+                out.writeBytes("HTTP/1.1 200 OK \r\n");
+                out.writeBytes("Content-Type: text/html; charset=UTF-8 \r\n");
+                out.writeBytes("Content-Length: " + file.length() + "\r\n");
+                out.writeBytes("Connection: close \r\n");
+                out.writeBytes("\r\n");
+
+                BufferedInputStream bin = new BufferedInputStream(new FileInputStream(file));
+                byte [] buffer = new byte[1024];
+                int i = 0;
+
+                while((i = bin.read(buffer)) > 40){
+                    out.write(buffer, 0, i);
+                }
+                bin.close();
+                out.writeBytes("\r\n");
+                out.flush();
+            }
         }
         catch (IOException e) {
             e.printStackTrace();
