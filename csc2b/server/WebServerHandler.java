@@ -22,18 +22,14 @@ public class WebServerHandler implements Runnable {
             out = new DataOutputStream(new BufferedOutputStream(clientConnection.getOutputStream()));
 
             String request = in.readLine();
-            System.out.println(request);
             StringTokenizer tokenizer = new StringTokenizer(request);
             String requestType = tokenizer.nextToken();
-            System.out.println(requestType);
             String fileName = tokenizer.nextToken().substring(1);
-            System.out.println(fileName);
             File file = new File(fileName);
 
             if (requestType.equals("GET")){
 
                 if (file.exists()){
-                    System.out.println("We in");
                     try {
                         out.writeBytes("HTTP/1.1 200 OK \r\n");
                         out.writeBytes("Content-Type: text/html; charset=UTF-8 \r\n");
@@ -62,7 +58,6 @@ public class WebServerHandler implements Runnable {
 
                 }
                 else{
-                    System.out.println("We NOT in");
                     out.writeBytes("HTTP/1.1 404 Not Found \r\n");
                     out.writeBytes("Content-Length: 0");
                     out.writeBytes("Connection: close \r\n");
