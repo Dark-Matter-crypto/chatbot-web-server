@@ -1,7 +1,9 @@
+import csc2b.server.WebServer;
+
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
-        System.out.println("Hello World");
+        WebServer server = new WebServer(1234);
+        server.runServer();
     }
 }
