@@ -10,6 +10,7 @@ public class WebServer {
     private static int port;
     private static boolean serverRunning = false;
 
+    //Constructor
     public WebServer(int port){
         this.port = port;
 
@@ -24,8 +25,8 @@ public class WebServer {
         }
     }
 
+    //Method to start running the server
     public static void runServer(){
-
         while(serverRunning){
             try {
                 Socket clientConnection = ss.accept();
