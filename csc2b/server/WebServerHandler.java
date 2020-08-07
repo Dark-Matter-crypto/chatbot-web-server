@@ -23,12 +23,10 @@ public class WebServerHandler implements Runnable {
             out = new DataOutputStream(new BufferedOutputStream(clientConnection.getOutputStream()));
 
             String request = in.readLine();
-            System.out.println(request);
             StringTokenizer tokenizer = new StringTokenizer(request);
             String requestType = tokenizer.nextToken();
             String fileName = tokenizer.nextToken().substring(1);
             File file = new File(fileName);
-            System.out.println(fileName);
 
             if (requestType.equals("GET")){
 
