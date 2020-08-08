@@ -9,7 +9,7 @@ public class Main {
         server.runServer();
 
         // Cat image url:
-        // http://localhost:1234/cat/sky.jpg
+        // http://localhost:1234/docs/cat.jpg
 
         // Sky image url:
         // http://localhost:1234/docs/sky.jpg

@@ -57,6 +57,7 @@ public class WebServerHandler implements Runnable {
                     }
                 }
                 else{
+                	System.out.println("File not found!!!!!!!!!!!!!!!");
                     out.writeBytes("HTTP/1.1 404 Not Found \r\n");
                     out.writeBytes("Connection: close \r\n");
                     out.writeBytes("\r\n");
