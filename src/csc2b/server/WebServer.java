@@ -5,7 +5,6 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class WebServer {
-
     private static ServerSocket ss;
     private static int port;
     private static boolean serverRunning = false;

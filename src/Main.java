@@ -3,6 +3,7 @@ import csc2b.server.WebServer;
 public class Main {
 
     public static void main(String[] args) {
+
         //Connect to port 1234
         WebServer server = new WebServer(1234);
         //Run server
